@@ -3,18 +3,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t nerf/multi-docker-client-test -f ./client/Dockerfile.dev ./client
+  - docker build -t nerfqh/multi-docker-client-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run nerf/multi-docker-client-test npm run test -- --coverage
+  - docker run nerfqh/multi-docker-client-test npm run test -- --coverage
 
 after_success:
-  - docker build -t nerf/multi-docker-client ./client
-  - docker build -t nerf/multi-docker-nginx ./nginx
-  - docker build -t nerf/multi-docker-server ./server
-  - docker build -t nerf/multi-docker-worker ./worker
+  - docker build -t nerfqh/multi-docker-client ./client
+  - docker build -t nerfqh/multi-docker-nginx ./nginx
+  - docker build -t nerfqh/multi-docker-server ./server
+  - docker build -t nerfqh/multi-docker-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push nerf/multi-docker-client 
-  - docker push nerf/multi-docker-nginx 
-  - docker push nerf/multi-docker-server 
-  - docker push nerf/multi-docker-worker 
+  - docker push nerfqh/multi-docker-client 
+  - docker push nerfqh/multi-docker-nginx 
+  - docker push nerfqh/multi-docker-server 
+  - docker push nerfqh/multi-docker-worker 
